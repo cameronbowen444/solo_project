@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Job</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand">Self-Employee Tracker</a>
+            <form class="d-flex" role="search">
+                <a href="/dashboard" class="btn btn-outline-primary btn2">Home</a>
+                <a href="/logout" class="btn btn-outline-primary">Logout</a>
+            </form>
+        </div>
+    </nav>
+    <div class="container">
+        <form class="form" action="/current" method="post">
+            <h2>Add Upcomming Job</h2>
+            {% with messages = get_flashed_messages(category_filter=['current']) %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <p>{{message}}</p>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            <input type="hidden" name="user_id" value={{user_id}}>
+            <div class="mb-3">
+                <label class="form-label">Job Name</label>
+                <input type="text" class="form-control" name="name">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Job Location</label>
+                <input type="text" class="form-control" name="location">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Job Description</label>
+                <textarea class="form-control" name="description" rows="4"></textarea>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Start Date</label>
+                <input type="date" class="form-control" name="start_date">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">End Date</label>
+                <input type="date" class="form-control" name="end_date">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Pay</label>
+                <input type="text" class="form-control" name="pay">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand">Self-Employee Tracker</a>
+            <form class="d-flex" role="search">
+                <a href="/logout" class="btn btn-outline-primary">Logout</a>
+            </form>
+        </div>
+    </nav>
+    <div class="container contain cont">
+        <div class="row justify-content-between table-head">
+            <div class="col-4">
+                <h2>All Current Jobs</h2>
+            </div>
+            <div class="col-4 right">
+                <a href="/new-job" class="btn btn-primary">Add New Job</a>
+            </div>
+        </div>
+        <table class="table">
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Location</th>
+                    <th scope="col">Start Date</th>
+                    <th scope="col">End Date</th>
+                    <th scope="col">Pay Rate</th>
+                    <th scope="col">Details</th>
+                </tr>
+            </thead>
+            <tbody class="table-group-divider">
+                {% for c in current_jobs.current %}
+                <tr>
+                    <th scope="row">{{c.id}}</th>
+                    <td>{{c.name}}</td>
+                    <td>{{c.location}}</td>
+                    <td>{{c.start_date.strftime('%m/%d/%Y')}}</td>
+                    <td>{{c.start_date.strftime('%m/%d/%Y')}}</td>
+                    <td>{{c.pay}}</td>
+                    <td class="flex">
+                        <a class="btn btn-primary" href="/job/{{c.id}}">See Details</a> 
+                        <form action="/complete" method="post">
+                            <input type="hidden" name="id" value={{c.id}}>
+                            <input type="submit" class="btn btn-success move" value="Complete Job">
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+            <h5>Total Potentail Earnings: $0</h5>
+    </div>
+    <div class="container contain cont">
+        <div class="row justify-content-between table-head">
+            <div class="col-4">
+                <h2>All Past Jobs</h2>
+            </div>
+            <div class="col-4 right">
+                <a href="/past-job" class="btn btn-primary">Add Past Job</a>
+            </div>
+        </div>
+        <table class="table">
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Location</th>
+                    <th scope="col">Start Date</th>
+                    <th scope="col">End Date</th>
+                    <th scope="col">Pay Rate</th>
+                    <th scope="col">Details</th>
+                </tr>
+            </thead>
+            <tbody class="table-group-divider">
+                {% for p in past_jobs.past %}
+                <tr>
+                    <th scope="row">{{p.id}}</th>
+                    <td>{{p.name}}</td>
+                    <td>{{p.location}}</td>
+                    <td>{{p.start_date.strftime('%m/%d/%Y')}}</td>
+                    <td>{{p.start_date.strftime('%m/%d/%Y')}}</td>
+                    <td>{{p.pay}}</td>
+                    <td><a class="btn btn-primary" href="/past/{{p.id}}">See Details</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <h5>Total Earnings: $0</h5>
+    </div>
+</body>
+</html>

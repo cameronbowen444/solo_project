@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Job</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand">Self-Employee Tracker</a>
+            <form class="d-flex" role="search">
+                <a href="/dashboard" class="btn btn-outline-primary btn2">Home</a>
+                <a href="/logout" class="btn btn-outline-primary">Logout</a>
+            </form>
+        </div>
+    </nav>
+    <div class="container contain">
+        <div class="row justify-content-between">
+            <div class="col-4">
+                <h1>Job Details -- {{current.name}}</h1>
+            </div>
+            <div class="col-4 right">
+                <form action="/complete" method="post">
+                    <input type="hidden" name="id" value={{current.id}}>
+                    <input type="submit" class="btn btn-success move" value="Complete Job">
+                </form>
+            </div>
+        </div>
+        <hr>
+        <dt><h3>Location</h3></dt>
+        <dd>{{current.location}}</dd>
+        <dt><h3>Description</h3></dt>
+        <dd>{{current.description}}</dd>
+        <dt><h3>Date and Time Scheduled</h3></dt>
+        <dd>{{current.start_date.strftime('%m/%d/%Y')}} -- {{current.end_date.strftime('%m/%d/%Y')}}</dd>
+        <dt><h3>Potential Earnings</h3></dt>
+        <dd>{{current.pay}}</dd>
+        <hr>
+        <div>
+            <a href="/job/edit/{{current.id}}" class="btn btn-primary">Edit</a> <a href="/delete/current/{{current.id}}" class="btn btn-danger">Delete</a>
+        </div>
+        
+    </div>
+</body>
+</html>
