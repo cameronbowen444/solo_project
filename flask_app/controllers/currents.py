@@ -11,7 +11,12 @@ def new_job():
     data = {
         'id' : session['user_id']
     }
-    return render_template("new.html", user=user.User.get_by_id(data))
+    states = [ 'AK', 'AL', 'AR', 'AZ', 'CA', 'CO', 'CT', 'DC', 'DE', 'FL', 'GA',
+        'HI', 'IA', 'ID', 'IL', 'IN', 'KS', 'KY', 'LA', 'MA', 'MD', 'ME',
+        'MI', 'MN', 'MO', 'MS', 'MT', 'NC', 'ND', 'NE', 'NH', 'NJ', 'NM',
+        'NV', 'NY', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX',
+        'UT', 'VA', 'VT', 'WA', 'WI', 'WV', 'WY']
+    return render_template("new.html", user=user.User.get_by_id(data), states=states)
 
 
 @app.route("/current", methods=['POST'])
@@ -21,17 +26,21 @@ def current_job():
 
     if not current.Current.validate_current(request.form):
         return redirect("/new-job")
-
+    location = request.form['street'] + " " + request.form['city'] + " " + request.form['state'] + " " + request.form['zip']
+    address = request.form['street2'] + " " + request.form['city2'] + " " + request.form['state2'] + " " + request.form['zip2']
     data = {
         "name": request.form['name'],
         "description": request.form['description'],
-        "location": request.form['location'],
+        "location": location,
         "start_date": request.form['start_date'],
         "end_date": request.form['end_date'],
         "pay" : request.form['pay'],
+        "address": address,
+        "full_name": request.form['full_name'],
+        "phone": request.form['phone'],
+        "email_address": request.form['email_address'],
         "user_id" : session['user_id']
     }
-    
     current.Current.save_current(data)
     return redirect("/dashboard")
 
@@ -59,7 +68,12 @@ def update_new(id):
     data = {
         'id' : id
     }
-    return render_template("new_edit.html", user=user.User.get_by_id(user_data), current=current.Current.get_current_job(data))
+    states = [ 'AK', 'AL', 'AR', 'AZ', 'CA', 'CO', 'CT', 'DC', 'DE', 'FL', 'GA',
+        'HI', 'IA', 'ID', 'IL', 'IN', 'KS', 'KY', 'LA', 'MA', 'MD', 'ME',
+        'MI', 'MN', 'MO', 'MS', 'MT', 'NC', 'ND', 'NE', 'NH', 'NJ', 'NM',
+        'NV', 'NY', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX',
+        'UT', 'VA', 'VT', 'WA', 'WI', 'WV', 'WY']
+    return render_template("new_edit.html", user=user.User.get_by_id(user_data), current=current.Current.get_current_job(data), states=states)
 
 @app.route("/update_new", methods=['POST'])
 def updating_job():
@@ -71,17 +85,20 @@ def updating_job():
             "current_id" : request.form['id']
         }
         return redirect(url_for("update_new", id=current_data['current_id']))
-
     data = {
-        "id" : request.form['id'],
+        "id": request.form['id'],
         "name": request.form['name'],
         "description": request.form['description'],
         "location": request.form['location'],
         "start_date": request.form['start_date'],
         "end_date": request.form['end_date'],
-        "pay" : request.form['pay']
+        "pay" : request.form['pay'],
+        "address": request.form['address'],
+        "full_name": request.form['full_name'],
+        "phone": request.form['phone'],
+        "email_address": request.form['email_address'],
+        "user_id" : session['user_id']
     }
-    
     current.Current.update_current(data)
     return redirect("/dashboard")
 
@@ -92,6 +109,8 @@ def destroy_current(id):
     }
     current.Current.delete_current(data)
     return redirect('/dashboard')
+
+
 
 @app.route("/complete", methods=['POST'])
 def complete_job():
@@ -104,3 +123,4 @@ def complete_job():
             "current_id" : request.form['id']
         }
     return redirect(url_for("destroy_current", id=current_data['current_id']))
+

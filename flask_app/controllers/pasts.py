@@ -11,7 +11,12 @@ def old_job():
     data = {
         'id' : session['user_id']
     }
-    return render_template("old.html", user=user.User.get_by_id(data))
+    states = [ 'AK', 'AL', 'AR', 'AZ', 'CA', 'CO', 'CT', 'DC', 'DE', 'FL', 'GA',
+        'HI', 'IA', 'ID', 'IL', 'IN', 'KS', 'KY', 'LA', 'MA', 'MD', 'ME',
+        'MI', 'MN', 'MO', 'MS', 'MT', 'NC', 'ND', 'NE', 'NH', 'NJ', 'NM',
+        'NV', 'NY', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX',
+        'UT', 'VA', 'VT', 'WA', 'WI', 'WV', 'WY']
+    return render_template("old.html", user=user.User.get_by_id(data), states=states)
 
 @app.route("/past", methods=['POST'])
 def past_job():
@@ -20,14 +25,19 @@ def past_job():
 
     if not past.Past.validate_past(request.form):
         return redirect('/past-job')
-
+    location = request.form['street'] + " " + request.form['city'] + " " + request.form['state'] + " " + request.form['zip']
+    address = request.form['street2'] + " " + request.form['city2'] + " " + request.form['state2'] + " " + request.form['zip2']
     data = {
         "name": request.form['name'],
         "description": request.form['description'],
-        "location": request.form['location'],
+        "location": location,
         "start_date": request.form['start_date'],
         "end_date": request.form['end_date'],
         "pay" : request.form['pay'],
+        "address": address,
+        "full_name": request.form['full_name'],
+        "phone": request.form['phone'],
+        "email_address": request.form['email_address'],
         "user_id" : session['user_id']
     }
     
@@ -71,15 +81,18 @@ def updating_past():
         return redirect(url_for("update_old", id=past_data['past_id']))
 
     data = {
-        "id" : request.form['id'],
         "name": request.form['name'],
         "description": request.form['description'],
         "location": request.form['location'],
         "start_date": request.form['start_date'],
         "end_date": request.form['end_date'],
-        "pay" : request.form['pay']
+        "pay" : request.form['pay'],
+        "address": request.form['address'],
+        "full_name": request.form['full_name'],
+        "phone": request.form['phone'],
+        "email_address": request.form['email_address'],
+        "user_id" : session['user_id']
     }
-    
     past.Past.update_past(data)
     return redirect("/dashboard")
 

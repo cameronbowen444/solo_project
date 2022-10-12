@@ -17,10 +17,12 @@ class User:
         self.current = []
         self.past = []
 
+
     @classmethod 
     def save_user(cls, data):
         query = "INSERT INTO users (first_name, last_name, email, password, created_at, updated_at) VALUES (%(first_name)s, %(last_name)s, %(email)s, %(password)s, NOW(), NOW());"
         return connectToMySQL(cls.db).query_db(query, data)
+
 
     @classmethod 
     def get_by_email(cls, data):
@@ -30,51 +32,63 @@ class User:
             return False
         return cls(result[0])
 
+
     @classmethod 
     def get_by_id(cls, data):
         query = "SELECT * FROM users WHERE id = %(id)s;"
         result = connectToMySQL(cls.db).query_db(query, data)
         return cls(result[0])
 
-    @classmethod 
-    def get_current_jobs(cls, data):
-        query = "SELECT * FROM users LEFT JOIN current ON current.user_id = users.id WHERE users.id = %(id)s;"
-        result =  connectToMySQL(cls.db).query_db(query, data)
-        user = cls(result[0])
-        for row in result:
-            current_data = {
-                "id": row['current.id'],
-                "name": row['name'],
-                "description": row['description'],
-                "location": row['location'],
-                "start_date": row['start_date'],
-                "end_date": row['end_date'],
-                "pay": row['pay'],
-                "created_at": row['current.created_at'],
-                "updated_at": row['current.updated_at']
-            }
-            user.current.append(current.Current(current_data))
-        return user
 
-    @classmethod 
-    def get_past_jobs(cls, data):
-        query = "SELECT * FROM users LEFT JOIN past ON past.user_id = users.id WHERE users.id = %(id)s;"
-        result =  connectToMySQL(cls.db).query_db(query, data)
-        user = cls(result[0])
-        for row in result:
-            past_data = {
-                "id": row['past.id'],
-                "name": row['name'],
-                "description": row['description'],
-                "location": row['location'],
-                "start_date": row['start_date'],
-                "end_date": row['end_date'],
-                "pay": row['pay'],
-                "created_at": row['past.created_at'],
-                "updated_at": row['past.updated_at']
-            }
-            user.past.append(past.Past(past_data))
-        return user
+    # @classmethod 
+    # def get_current_jobs(cls, data):
+    #     query = "SELECT * FROM users LEFT JOIN current ON current.user_id = users.id WHERE users.id = %(id)s;"
+    #     result =  connectToMySQL(cls.db).query_db(query, data)
+    #     user = cls(result[0])
+    #     for row in result:
+    #         current_data = {
+    #             "id": row['current.id'],
+    #             "name": row['name'],
+    #             "description": row['description'],
+    #             "location": row['location'],
+    #             "start_date": row['start_date'],
+    #             "end_date": row['end_date'],
+    #             "pay": row['pay'],
+    #             "address": row['address'],
+    #             "full_name": row['full_name'],
+    #             "phone": row['phone'],
+    #             "email_address": row['email_address'],
+    #             "created_at": row['current.created_at'],
+    #             "updated_at": row['current.updated_at']
+    #         }
+    #         user.current.append(current.Current(current_data))
+    #     return user
+
+
+    # @classmethod 
+    # def get_past_jobs(cls, data):
+    #     query = "SELECT * FROM users LEFT JOIN past ON past.user_id = users.id WHERE users.id = %(id)s;"
+    #     result =  connectToMySQL(cls.db).query_db(query, data)
+    #     user = cls(result[0])
+    #     for row in result:
+    #         past_data = {
+    #             "id": row['past.id'],
+    #             "name": row['name'],
+    #             "description": row['description'],
+    #             "location": row['location'],
+    #             "start_date": row['start_date'],
+    #             "end_date": row['end_date'],
+    #             "pay": row['pay'],
+    #             "address": row['address'],
+    #             "full_name": row['full_name'],
+    #             "phone": row['phone'],
+    #             "email_address": row['email_address'],
+    #             "created_at": row['past.created_at'],
+    #             "updated_at": row['past.updated_at']
+    #         }
+    #         user.past.append(past.Past(past_data))
+    #     return user
+
 
     @staticmethod
     def validate_user(user):

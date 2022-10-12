@@ -18,7 +18,7 @@
             </form>
         </div>
     </nav>
-    <div class="container contain">
+    <div class="container contain cont">
         <div class="row justify-content-between">
             <div class="col-4">
                 <h1>Job Details -- {{past.name}}</h1>
@@ -28,14 +28,25 @@
             </div>
         </div>
         <hr>
-        <dt><h3>Location</h3></dt>
-        <dd>{{past.location}}</dd>
-        <dt><h3>Description</h3></dt>
-        <dd>{{past.description}}</dd>
-        <dt><h3>Date and Time Scheduled</h3></dt>
-        <dd>{{past.start_date.strftime('%m/%d/%Y')}} -- {{past.end_date.strftime('%m/%d/%Y')}}</dd>
-        <dt><h3>Potential Earnings</h3></dt>
-        <dd>{{past.pay}}</dd>
+        <div>
+            <div class="col-4">
+                <hr>
+                <dt><h3>Distance</h3></dt>
+                <dd><span>From: {{past.location}}</span></dd>
+                <dd>To: {{past.address}}</dd> 
+                <hr>
+                <dt><h3>Job Information</h3></dt>
+                <dd>Description -- {{past.description}}</dd>
+                <dd>Start Date: {{past.start_date.strftime('%m/%d/%Y')}} -- End Date: {{past.end_date.strftime('%m/%d/%Y')}}</dd>
+                <dd>Arrive Time: {{past.start_date.strftime('%I:%M% %p')}}</dd>
+                <dd>Total Pay: ${{past.pay}}</dd>
+                <hr>
+                <dt><h3>Contact Info</h3></dt>
+                <dd >Employer Name: {{past.full_name}}</dd>
+                <dd>Employer Phone Number: {{past.phone}}</dd>
+                <dd>Employer Email Address: {{past.email_address}}</dd>
+            </div>
+        </div>
         <hr>
         <div>
             <a href="/past/edit/{{past.id}}" class="btn btn-primary">Edit</a> <a href="/delete/past/{{past.id}}" class="btn btn-danger">Delete</a>

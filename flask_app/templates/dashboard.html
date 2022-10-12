@@ -18,84 +18,78 @@
         </div>
     </nav>
     <div class="container contain cont">
-        <div class="row justify-content-between table-head">
-            <div class="col-4">
-                <h2>All Current Jobs</h2>
-            </div>
-            <div class="col-4 right">
-                <a href="/new-job" class="btn btn-primary">Add New Job</a>
-            </div>
+        <div class="table-head">
+            <h3>Upcomming Jobs -- Potential Earnings(<span id="totalCurrent"></span>)</h3>
         </div>
-        <table class="table">
-            <thead class="table-dark">
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Location</th>
-                    <th scope="col">Start Date</th>
-                    <th scope="col">End Date</th>
-                    <th scope="col">Pay Rate</th>
-                    <th scope="col">Details</th>
-                </tr>
-            </thead>
-            <tbody class="table-group-divider">
-                {% for c in current_jobs.current %}
-                <tr>
-                    <th scope="row">{{c.id}}</th>
-                    <td>{{c.name}}</td>
-                    <td>{{c.location}}</td>
-                    <td>{{c.start_date.strftime('%m/%d/%Y')}}</td>
-                    <td>{{c.start_date.strftime('%m/%d/%Y')}}</td>
-                    <td>{{c.pay}}</td>
-                    <td class="flex">
-                        <a class="btn btn-primary" href="/job/{{c.id}}">See Details</a> 
-                        <form action="/complete" method="post">
-                            <input type="hidden" name="id" value={{c.id}}>
-                            <input type="submit" class="btn btn-success move" value="Complete Job">
-                        </form>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-            <h5>Total Potentail Earnings: $0</h5>
-    </div>
-    <div class="container contain cont">
-        <div class="row justify-content-between table-head">
-            <div class="col-4">
-                <h2>All Past Jobs</h2>
-            </div>
-            <div class="col-4 right">
-                <a href="/past-job" class="btn btn-primary">Add Past Job</a>
-            </div>
+        <div class="table-space">
+            <table class="table table-dark table-hover table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Start Date</th>
+                        <th scope="col">Arrive Time</th>
+                        <th scope="col">Potential Earnings</th>
+                        <th scope="col">Details</th>
+                    </tr>
+                </thead>
+                <tbody id="table1" class="divider">
+                    {% for c in current_jobs %}
+                        {% if c.user_id.id == session["user_id"] %}
+                        <tr>
+                            <td>{{ c.name }}</td>
+                            <td>{{ c.start_date.strftime('%m-%d-%Y') }}</td>
+                            <td>{{ c.start_date.strftime('%I:%M% %p') }}</td>
+                            <td>$<span class="price1">{{c.pay}}</span></td>
+                            <td class="flex">
+                                <a class="btn btn-primary" href="/job/{{c.id}}">See Details</a> 
+                            </td>
+                        </tr>
+                        {% endif %}
+                    {% endfor %}
+                </tbody>
+            </table> 
+            <a href="/new-job" class="btn btn-primary">Add New Job</a>
         </div>
-        <table class="table">
-            <thead class="table-dark">
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Location</th>
-                    <th scope="col">Start Date</th>
-                    <th scope="col">End Date</th>
-                    <th scope="col">Pay Rate</th>
-                    <th scope="col">Details</th>
-                </tr>
-            </thead>
-            <tbody class="table-group-divider">
-                {% for p in past_jobs.past %}
-                <tr>
-                    <th scope="row">{{p.id}}</th>
-                    <td>{{p.name}}</td>
-                    <td>{{p.location}}</td>
-                    <td>{{p.start_date.strftime('%m/%d/%Y')}}</td>
-                    <td>{{p.start_date.strftime('%m/%d/%Y')}}</td>
-                    <td>{{p.pay}}</td>
-                    <td><a class="btn btn-primary" href="/past/{{p.id}}">See Details</a></td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-        <h5>Total Earnings: $0</h5>
     </div>
+    <div class="container contain2 cont">
+        <div class="table-head">
+            <h3>Past Jobs -- Real Earnings(<span id="totalPast"></span>)</h3>
+        </div>
+        <div class="table-space">
+            <table class="table table-dark table-hover table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Start Date</th>
+                        <th scope="col">Arrive Time</th>
+                        <th scope="col">Potential Earnings</th>
+                        <th scope="col">Details</th>
+                    </tr>
+                </thead>
+                <tbody id="table2" class="divider">
+                    {% for p in past_jobs %}
+                        {% if p.user_id.id == session["user_id"] %}
+                        <tr>
+                            <td>{{ p.name }}</td>
+                            <td>{{ p.start_date.strftime('%m-%d-%Y') }}</td>
+                            <td>{{ p.start_date.strftime('%I:%M% %p') }}</td>
+                            <td>$<span class="price2">{{p.pay}}</span></td>
+                            <td class="flex">
+                                <a class="btn btn-primary" href="/past/{{p.id}}">See Details</a> 
+                            </td>
+                        </tr>
+                        {% endif %}
+                    {% endfor %}
+                </tbody>
+            </table>
+            <a href="/past-job" class="btn btn-primary">Add Past Job</a>
+        </div>
+        
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
 </body>
 </html>

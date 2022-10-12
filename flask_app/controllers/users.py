@@ -1,9 +1,13 @@
 from flask_app import app 
-from flask import render_template, redirect, request, session, flash
-from flask_app.models import user
+from flask import render_template, redirect, request, session, flash, url_for, jsonify
+from flask_app.models import user, current, past
+import requests
+import os
+from flask_app.config.mysqlconnection import connectToMySQL
 from flask_bcrypt import Bcrypt 
 bcrypt = Bcrypt(app)
 
+print(os.environ.get("FLASK_APP_API_KEY"))
 
 @app.route("/")
 def index():
@@ -44,11 +48,12 @@ def login():
 def dashboard():
     if 'user_id' not in session:
         return redirect('/logout')
+
     data ={
         'id': session['user_id']
     }
+    return render_template("dashboard.html", user=user.User.get_by_id(data), current_jobs=current.Current.get_current_jobs(), past_jobs=past.Past.get_past_jobs())
 
-    return render_template("dashboard.html", user=user.User.get_by_id(data), current_jobs=user.User.get_current_jobs(data), past_jobs=user.User.get_past_jobs(data))
 
 @app.route("/logout")
 def logout():

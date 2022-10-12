@@ -8,7 +8,7 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 </head>
-<body>
+<body class="body">
     <nav class="navbar navbar-dark bg-dark">
         <div class="container-fluid">
             <a class="navbar-brand">Self-Employee Tracker</a>
@@ -18,7 +18,7 @@
             </form>
         </div>
     </nav>
-    <div class="container">
+    <div class="container contain cont2">
         <form class="form" action="/update_old" method="post">
             <h2>Update Job -- {{past.name}}</h2>
             {% with messages = get_flashed_messages(category_filter=['past']) %}
@@ -29,29 +29,53 @@
                 {% endif %}
             {% endwith %}
             <input type="hidden" name="id" value={{past.id}}>
-            <div class="mb-3">
-                <label class="form-label">Job Name</label>
-                <input type="text" class="form-control" name="name" value="{{past.name}}">
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Job Location</label>
-                <input type="text" class="form-control" name="location" value="{{past.location}}">
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Job Description</label>
-                <textarea class="form-control" name="description" rows="4">{{past.description}}</textarea>
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Start Date</label>
-                <input type="date" class="form-control" name="start_date" value={{past.start_date}}>
-            </div>
-            <div class="mb-3">
-                <label class="form-label">End Date</label>
-                <input type="date" class="form-control" name="end_date" value={{past.end_date}}>
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Pay</label>
-                <input type="text" class="form-control" name="pay" value={{past.pay}}>
+            <div class="row justify-content-around">
+                <div class="col-4">
+                    <div class="mb-3">
+                        <label class="form-label">Job Name</label>
+                        <input type="text" class="form-control" name="name" value="{{past.name}}">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Job Description</label>
+                        <textarea class="form-control" name="description" rows="4">{{past.description}}</textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Start Date And Arrive Time</label>
+                        <input type="datetime-local" class="form-control" name="start_date" value="{{past.start_date}}">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">End Date</label>
+                        <input type="datetime-local" class="form-control" name="end_date" value="{{past.end_date}}">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Pay</label>
+                        <input type="number" class="form-control" step="any" name="pay" value="{{past.pay}}">
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="col-12">
+                        <label class="form-label">Home Location</label>
+                        <input type="text" class="form-control" name="location" placeholder="1234 Main St" value="{{past.location}}">
+                    </div>
+                    
+                    <div class="col-12">
+                        <label class="form-label">Work Address</label>
+                        <input type="text" class="form-control" name="address" placeholder="1234 Main St" value="{{past.address}}">
+                    </div>
+                    <h5 class="employ">Employer Information</h5>
+                    <div class="mb-3">
+                        <label class="form-label">Full Name</label>
+                        <input type="text" class="form-control" name="full_name" value="{{past.full_name}}">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Phone Number</label>
+                        <input type="text" class="form-control" name="phone" value="{{past.phone}}">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Email Address</label>
+                        <input type="text" class="form-control"  name="email_address" value="{{past.email_address}}">
+                    </div>
+                </div>
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
