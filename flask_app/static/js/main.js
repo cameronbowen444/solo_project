@@ -23,3 +23,5 @@ $(document).ready(function(){
     // var payTotal2 = $("#totalPast").html(sum2);
     document.getElementById("totalPast").innerHTML = "$" + sum2.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
 })
+
+

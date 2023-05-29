@@ -14,7 +14,6 @@
             <a class="navbar-brand">Self-Employee Tracker</a>
             <form class="d-flex" role="search">
                 <a href="/dashboard" class="btn btn-outline-primary btn2">Home</a>
-                <a href="/logout" class="btn btn-outline-primary">Logout</a>
             </form>
         </div>
     </nav>
@@ -28,8 +27,8 @@
                     {% endfor %}
                 {% endif %}
             {% endwith %}
-            <div class="row justify-content-around">
-                <div class="col-4">
+            <div>
+                <div class="col">
                     <input type="hidden" name="user_id" value={{user_id}}>
                     <div class="mb-3">
                         <label class="form-label">Job Name</label>
@@ -56,13 +55,13 @@
                         <input type="text" class="form-control" step="any" name="pay">
                     </div>
                 </div>
-                <div class="col-4">
+                <div class="col">
                     <div class="col-12">
                         <label class="form-label">Home Location</label>
                         <input type="text" class="form-control" name="street" placeholder="1234 Main St">
                     </div>
                     <div class="row g-3">
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <label class="form-label">City</label>
                             <input type="text" name="city" class="form-control">
                         </div>
@@ -75,7 +74,7 @@
                                 {% endfor %}
                             </select>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-4">
                             <label for="inputZip" class="form-label">Zip</label>
                             <input type="text" name="zip" class="form-control" id="inputZip">
                         </div>
@@ -85,7 +84,7 @@
                         <input type="text" class="form-control" name="street2" placeholder="1234 Main St">
                     </div>
                     <div class="row g-3">
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <label class="form-label">City</label>
                             <input type="text" name="city2" class="form-control">
                         </div>
@@ -98,7 +97,7 @@
                                 {% endfor %}
                             </select>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-4">
                             <label for="inputZip" class="form-label">Zip</label>
                             <input type="text" name="zip2" class="form-control" id="inputZip">
                         </div>

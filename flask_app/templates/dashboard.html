@@ -26,9 +26,8 @@
                 <thead>
                     <tr>
                         <th scope="col">Name</th>
-                        <th scope="col">Start Date</th>
-                        <th scope="col">Arrive Time</th>
-                        <th scope="col">Potential Earnings</th>
+                        <th class="day" scope="col">Start Date</th>
+                        <th class="c-price" scope="col">Earnings</th>
                         <th scope="col">Details</th>
                     </tr>
                 </thead>
@@ -37,11 +36,10 @@
                         {% if c.user_id.id == session["user_id"] %}
                         <tr>
                             <td>{{ c.name }}</td>
-                            <td>{{ c.start_date.strftime('%m-%d-%Y') }}</td>
-                            <td>{{ c.start_date.strftime('%I:%M% %p') }}</td>
-                            <td>$<span class="price1">{{c.pay}}</span></td>
-                            <td class="flex">
-                                <a class="btn btn-primary" href="/job/{{c.id}}">See Details</a> 
+                            <td class="day">{{ c.start_date.strftime('%B %d, %Y') }}</td>
+                            <td class="c-price">$<span class="price1">{{c.pay}}</span></td>
+                            <td>
+                                <a class="btn btn-primary" href="/job/{{c.id}}">Details</a> 
                             </td>
                         </tr>
                         {% endif %}
@@ -60,9 +58,8 @@
                 <thead>
                     <tr>
                         <th scope="col">Name</th>
-                        <th scope="col">Start Date</th>
-                        <th scope="col">Arrive Time</th>
-                        <th scope="col">Potential Earnings</th>
+                        <th class="day" scope="col">Start Date</th>
+                        <th class="c-price" scope="col">Earnings</th>
                         <th scope="col">Details</th>
                     </tr>
                 </thead>
@@ -71,11 +68,10 @@
                         {% if p.user_id.id == session["user_id"] %}
                         <tr>
                             <td>{{ p.name }}</td>
-                            <td>{{ p.start_date.strftime('%m-%d-%Y') }}</td>
-                            <td>{{ p.start_date.strftime('%I:%M% %p') }}</td>
-                            <td>$<span class="price2">{{p.pay}}</span></td>
-                            <td class="flex">
-                                <a class="btn btn-primary" href="/past/{{p.id}}">See Details</a> 
+                            <td class="day">{{ p.start_date.strftime('%B %d, %Y') }}</td>
+                            <td class="c-price">$<span class="price2">{{p.pay}}</span></td>
+                            <td>
+                                <a class="btn btn-primary" href="/past/{{p.id}}">Details</a> 
                             </td>
                         </tr>
                         {% endif %}

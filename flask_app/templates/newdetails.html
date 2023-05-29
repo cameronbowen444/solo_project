@@ -14,25 +14,24 @@
             <a class="navbar-brand">Self-Employee Tracker</a>
             <form class="d-flex" role="search">
                 <a href="/dashboard" class="btn btn-outline-primary btn2">Home</a>
-                <a href="/logout" class="btn btn-outline-primary">Logout</a>
             </form>
         </div>
     </nav>
-    <div class="container contain cont">
+    <div class="container contain">
         <div class="row justify-content-between">
             <div class="col-4">
-                <h1>Job Details -- {{current.name}}</h1>
+                <h1>{{current.name}}</h1>
             </div>
-            <div class="col-4 right">
+            <div class="col right">
                 <form action="/complete" method="post">
                     <input type="hidden" name="id" value={{current.id}}>
-                    <input type="submit" class="btn btn-success move" value="Complete Job">
+                    <input type="submit" class="btn btn-success move" value="Complete">
                 </form>
             </div>
         </div>
         <hr>
         <div>
-            <div class="col-4">
+            <div class="col">
                 <hr>
                 <dt><h3>Distance</h3></dt>
                 <dd><span>From: {{current.location}}</span></dd>

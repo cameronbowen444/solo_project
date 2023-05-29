@@ -13,10 +13,14 @@ print(os.environ.get("FLASK_APP_API_KEY"))
 def index():
     return render_template("index.html")
 
+@app.route("/reg")
+def index2():
+    return render_template("index2.html")
+
 @app.route("/register", methods=['POST'])
 def register():
     if not user.User.validate_user(request.form):
-        return redirect("/")
+        return redirect("/reg")
     data = {
         "first_name": request.form['first_name'],
         "last_name": request.form['last_name'],
@@ -34,10 +38,10 @@ def login():
     user_in_db = user.User.get_by_email(request.form)
 
     if not user_in_db:
-        flash("Invaild Email/Password", "login")
+        flash("Invaild Email/ Password", "login")
         return redirect("/")
     if not bcrypt.check_password_hash(user_in_db.password, request.form['password']):
-        flash("Invaild Email/Password", "login")
+        flash("Invaild Email/ Password", "login")
         return redirect("/")
 
     session['user_id'] = user_in_db.id

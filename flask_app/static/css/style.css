@@ -7,13 +7,67 @@
     border: 4px solid rgb(59, 59, 215);
     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
-body{
-    background: rgb(2,0,36);
-    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 0%, rgba(0,212,255,1) 100%);
+@media only screen and (min-width: 600px) {
+    .log-box{
+        margin: 0 auto;
+        width: 400px;
+    }
+}
+@media only screen and (max-width: 700px) {
+    .log-box{
+        margin: 0 auto;
+        padding: 0px !important;
+    }
+    .c-price{
+        display: none;
+    }
+    .cont{
+        padding: 25px 0px !important;
+    }
+    .table-space{
+        margin: 5px !important;
+    }
+}
+@media only screen and (max-width: 500px) {
+    .c-price{
+        display: none;
+    }
+    .day{
+        display: none;
+    }
+}
+.form-control{
+    background: transparent !important;
+}
+.extra{
+    padding: 10px 0px !important;
+}
+/* Change the white to any color */
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active{
+    -webkit-box-shadow: 0 0 0 30px rgb(57, 175, 215) inset !important;
+}
+
+html, body{
+    /* background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 0%, rgba(0,212,255,1) 100%); */
+    position: relative;
+    background: linear-gradient( 135deg, #92FFC0 10%, #002661 100%) no-repeat;
+    max-width: 100%;
+    overflow-x:hidden;
+    height: 100%;
 }
 .body{
-    background: rgb(2,0,36);
-    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 20%, rgba(0,212,255,1) 100%);
+    background: linear-gradient( 135deg, #92FFC0 10%, #002661 100%);
+    height: 100vh;
+    /* background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 20%, rgba(0,212,255,1) 100%); */
+}
+.head{
+    font-size: 45px;
+}
+.distance{
+    margin: 10px 0px;
 }
 .btn2{
     margin-right: 15px;
@@ -37,7 +91,7 @@ body{
     color: white;
 }
 .contain{
-    margin: 40px 0px;
+    margin: 40px 5px;
     color: white;
 }
 .contain2{
@@ -58,20 +112,21 @@ body{
 }
 .box-error{
     font-weight: bolder;
-    padding: 3px;
-    margin: 5px;
+    margin: 10px 0px;
+    background-color: rgb(72, 77, 185);
+    padding: 10px;
+    border-radius: 7px;
 }
 .error{
     color: red;
 }
-
+ul, li{
+    list-style: none;
+}
 .cont{
     border-radius: 5px;
     padding: 25px;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
-}
-.flex{
-    display: flex;
 }
 .move{
     margin-left: 7px;
@@ -83,11 +138,8 @@ body{
     padding: 10px;
     border: 2px solid grey;
 }
-
 .table-space{
-    margin: 20px;
-    padding: 10px;
-    background-color: grey;
+    margin: 5px;
 }
 .distance{
     margin-top: 25px;
@@ -109,10 +161,5 @@ th{
     border-radius: 5px;
     padding: 25px;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
-}
-.big{
-    margin-top: -20px;
-    margin-bottom: 30px;
-    font-size: 50px;
-    color: white;
+    max-width: 700px !important;
 }

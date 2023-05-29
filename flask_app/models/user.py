@@ -97,7 +97,7 @@ class User:
             flash("First name must be at least 3 characters!", "register")
             is_valid = False
         if len(user['last_name']) < 3:
-            flash("First name must be at least 3 characters!", "register")
+            flash("Last name must be at least 3 characters!", "register")
             is_valid = False
         if not EMAIL_REGEX.match(user['email']):
             flash("Invalid Email Address", "register")

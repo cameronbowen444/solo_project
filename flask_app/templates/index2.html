@@ -18,34 +18,46 @@
     </div>
     <div class="container contain">
         <div class="row justify-content-center">
-            <div class="col">
+            <div id="register" class="col">
                 <div class="log-box">
-                    <h1 class="head text-center">Login</h1>
-                    {% with messages = get_flashed_messages(category_filter=['login']) %}
+                    <h1 class="head text-center">Register</h1>
+                    {% with messages = get_flashed_messages(category_filter=['register']) %}
                         {% if messages %}
                             <ul class="box-error">
                                 <h2 class="text-danger">Errors:</h2>
                             {% for message in messages %}
-                                <li><span class="error"></span>{{message}}</li>
+                                <li> {{message}}</li>
                             {% endfor %}
                             </ul>
                         {% endif %}
                     {% endwith %}
-                    <form action="/login" method="post">
+                    <form action="/register" method="post" >
                         <div class="form-floating mb-3">
-                            <input type="text" name="email" class="form-control">
-                            <label>Email address</label>
+                            <input type="text" name="first_name" class="form-control">
+                            <label>First Name</label>
                         </div>
-                        <div class="form-floating">
-                            <input type="password" name="password" class="form-control">
-                            <label for="floatingPassword">Password</label>
+                        <div class="form-floating mb-3">
+                            <input type="text" name="last_name" class="form-control" >
+                            <label>Last Name</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" name="email" class="form-control" >
+                            <label>Email Address</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" name="password" class="form-control" >
+                            <label>Password</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" name="confirm" class="form-control" >
+                            <label>Confirm Password</label>
                         </div>
                         <div class="d-grid gap-2">
                             <button class="btn btn-primary extra" type="submit">Submit</button>
                         </div>
                     </form>
                     <div class="distance">
-                        <a href="/reg">Don't Have an Account?</a>
+                        <a href="/">Have an Account?</a>
                     </div>
                 </div>
             </div>

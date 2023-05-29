@@ -29,8 +29,8 @@
                 {% endif %}
             {% endwith %}
             <input type="hidden" name="id" value={{past.id}}>
-            <div class="row justify-content-around">
-                <div class="col-4">
+            <div>
+                <div class="col">
                     <div class="mb-3">
                         <label class="form-label">Job Name</label>
                         <input type="text" class="form-control" name="name" value="{{past.name}}">
@@ -52,7 +52,7 @@
                         <input type="number" class="form-control" step="any" name="pay" value="{{past.pay}}">
                     </div>
                 </div>
-                <div class="col-4">
+                <div class="col">
                     <div class="col-12">
                         <label class="form-label">Home Location</label>
                         <input type="text" class="form-control" name="location" placeholder="1234 Main St" value="{{past.location}}">
