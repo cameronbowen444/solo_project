@@ -77,9 +77,6 @@ class Past:
         if len(past['description']) < 3:
             flash("Job description must be at least 3 characters!", "past")
             is_valid = False
-        if len(past['location']) < 3:
-            flash("Job location must be at least 3 characters!", "past")
-            is_valid = False
         if past['start_date'] == "":
             flash("Start date is required!", "past")
             is_valid = False

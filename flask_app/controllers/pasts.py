@@ -81,6 +81,7 @@ def updating_past():
         return redirect(url_for("update_old", id=past_data['past_id']))
 
     data = {
+        "id": request.form['id'],
         "name": request.form['name'],
         "description": request.form['description'],
         "location": request.form['location'],
